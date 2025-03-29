@@ -167,15 +167,26 @@ def draw_traditional_digit(tft, digit, x_offset, y_offset, scale_x=14, scale_y=1
                         y = y_offset + row_idx * scale_y + j
                         tft.pixel(x, y, color)  # Draw the pixel with the specified color
 
-def show_traditional_number(tft, number, color=gc9a01.color565(255, 255, 255)):
-    """Displays a traditional number on screen with a specified color."""
+def show_traditional_number(tft, number):
+    """Displays a traditional number on screen with automatic color adjustment based on time."""
     tft.fill(0)  # Clear screen
     text = str(number)
     num_digits = len(text)
+
+    # 📌 Get current RTC time
+    hours, _, _ = rtc.get_time()  # Fetch only hours
+
+    # 📌 Determine color based on time
+    if 22 <= hours or hours < 8:  # 22:00 - 07:59 → Yellow
+        color = gc9a01.color565(120, 120, 0)
+    else:  # 08:00 - 21:59 → White
+        color = gc9a01.color565(255, 255, 255)
+
     digit_width = 6 * 14  # Adjust width for the scaled grid (scale=14)
     total_width = num_digits * digit_width
     start_x = (240 - total_width) // 2  # Center horizontally
     start_y = (240 - 7 * 16) // 2  # Center vertically
+
     for i, digit in enumerate(text):
         draw_traditional_digit(tft, digit, start_x + i * digit_width, start_y, scale_x=14, scale_y=16, color=color)
 
@@ -286,12 +297,14 @@ def adjust_time():
 
 
 
+
 # Main loop to update the display only when the time changes and adjust time if needed
 previous_time = (0, 0)  # Initialize previous_time to a valid value (e.g., 00:00)
 while True:
     previous_time = update_display(previous_time)  # Update display
     adjust_time()  # Check if time adjustment is needed
     time.sleep(1)  # Sleep for 1 second
+
 
 
 
