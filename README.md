@@ -1,7 +1,9 @@
 # NixieClock_GC9A01
 The following is code for a minimal nixie clock that uses four GC9A01 displays, DS1307 RTC and a Raspberry PICO RP2040.
 
+
 ![20250328_111458](https://github.com/user-attachments/assets/e6ed3933-40c1-45ad-94bb-3b901ab32102)
+# Note: If you need the files to use in your own project Download .zip file labelled "Version1" 
 
 # Overview
 The files provided are a collection of code to help in getting a nixie clock working. This is mostly just a messy prototype so some of the code either does not fully function or is redundant. The main function which is to show time fully works as long as you have the following parts:
