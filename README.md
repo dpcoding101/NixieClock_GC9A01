@@ -9,6 +9,12 @@ The files provided are a collection of code to help in getting a nixie clock wor
 - RTC module // The module I am using is the RTC DS1307 please find the appropriate drivers if you are using a different type
 - 4x GC9A01 // Credit to the person that provided drivers for the displays below  
 
+# Install
+After uploading all the files into the PICO edit the code to support your RTC if it does not use the ds1307 module. 
+Use the file labelled "refrshtest.py" to see if all the displays are appropriately connected. 
+Set up the time via the file labelled "SetRTCtime.py."
+Plug-in and play.
+
 # Wiring
 File: clock.py
 - Full list of used GPIOs:
@@ -50,3 +56,20 @@ Buttons: // WARNING: these work but are essentially redundant because of the slo
 Onboard LED:
 - GPIO25 (internal LED pin)
 
+
+
+
+
+
+
+
+# Drivers
+https://github.com/russhughes/gc9a01_mpy
+https://github.com/mcauser/micropython-tinyrtc-i2c/tree/master
+
+GC9A01 Display driver in MicroPython based on devbis st7789py_mpy module from
+https://github.com/devbis/st7789py_mpy modified to drive 240x240 pixel GC9A01
+displays.
+Documentation can be found at https://penfold.owt.com/gc9a01py/.
+If you are looking for a faster driver with additional features, check out the
+C version of the driver at https://github.com/russhughes/gc9a01_mpy
